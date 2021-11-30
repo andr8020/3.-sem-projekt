@@ -40,7 +40,6 @@
 
   {% endif %}
   {% else %}
-  <small>Login</a> to like</small>
   {% endif %}
 
   - {{ total_likes }} Likes
@@ -59,13 +58,12 @@ No Comments Yet...<a href="{% url 'photo:add_comment' photo.pk %}">Add One</a>
 
 {% for comment in photo.comments.all %}
 <strong>
-  {{ user.username }} -
+  {{ comment.name }} -
   {{ comment.date_added }}
 </strong>
 <br />
 {{ comment.body }}
 <br /><br />
-
 
 
 {% endfor %}

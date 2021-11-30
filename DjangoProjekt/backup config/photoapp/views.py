@@ -1,6 +1,6 @@
 from django.shortcuts import render
 # photoapp/views.py
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404
 
 from django.core.exceptions import PermissionDenied
 from django.urls.base import reverse
@@ -20,19 +20,6 @@ from django.http import HttpResponseRedirect
 # photoapp/views.py
 
 
-def LikeView(request, pk):
-    photo = get_object_or_404(Photo, id=request.POST.get('photo_id'))
-    liked = False
-    if photo.likes.filter(id=request.user.id).exists():
-        photo.likes.remove(request.user)
-        liked = False
-    else:
-        photo.likes.add(request.user)
-        liked = True
-
-    return HttpResponseRedirect(reverse('photo:detail', args=[str(pk)]))
-
-
 class PhotoListView(ListView):
 
     model = Photo
@@ -40,6 +27,8 @@ class PhotoListView(ListView):
     template_name = 'photoapp/list.html'
 
     context_object_name = 'photos'
+
+    success_url = reverse_lazy('photo:list')
 
 
 class PhotoTagListView(PhotoListView):
@@ -65,20 +54,7 @@ class PhotoDetailView(DetailView):
 
     template_name = 'photoapp/detail.html'
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(PhotoDetailView, self).get_context_data(
-            *args, **kwargs)
-
-        stuff = get_object_or_404(Photo, id=self.kwargs['pk'])
-        total_likes = stuff.total_likes()
-
-        liked = False
-        if stuff.likes.filter(id=self.request.user.id).exists():
-            liked = True
-
-        context["total_likes"] = total_likes
-        context["liked"] = liked
-        return context
+    context_object_name = 'photo'
 
 
 class PhotoCreateView(LoginRequiredMixin, CreateView):
@@ -142,4 +118,15 @@ class PhotoCommentView(CreateView):
         form.instance.post_id = self.kwargs['pk']
         return super().form_valid(form)
 
-    success_url = reverse_lazy('photo:list')
+
+def LikeView(request, pk):
+    photo = get_object_or_404(Photo, id=request.POST.get('photo_id'))
+    liked = False
+    if photo.likes.filter(id=request.user.id).exists():
+        photo.likes.remove(request.user)
+        liked = False
+    else:
+        photo.likes.add(request.user)
+        liked = True
+
+    return HttpResponseRedirect(reverse('photo:detail', args=[str(pk)]))

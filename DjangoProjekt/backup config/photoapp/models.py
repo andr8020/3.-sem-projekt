@@ -20,9 +20,6 @@ class Photo(models.Model):
 
     tags = TaggableManager()
 
-    def total_likes(self):
-        return self.likes.count()
-
     def __str__(self):
         return self.title
 
@@ -30,7 +27,7 @@ class Photo(models.Model):
 class Comment(models.Model):
     post = models.ForeignKey(
         Photo, related_name="comments", on_delete=models.CASCADE)
-    name = models.CharField(max_length=255, default='navn')
+    name = models.CharField(max_length=255)
     body = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
 

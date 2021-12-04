@@ -1,23 +1,36 @@
 <!-- users/templates/users/login.html -->
-{% extends 'base.html' %} 
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% block body %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 
-<div class="mx-auto">
-  <div class="form-group">
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
+    </div>
+
+    <!-- Login Form -->
     <form action="" method="post">
-      {% csrf_token %} 
-      {{ form|crispy }}
-      <button type="submit" class="btn btn-danger w-100 my-3">Sign in</button>
+      {% csrf_token %}
+      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
+      <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
+      <input type="submit" class="fadeIn fourth" value="Log In">
     </form>
-  </div>
-  {% comment %}  Already Registered {% endcomment %}
-  <div class="text-center w-100">
-    <p class="text-muted font-weight-bold">
-      Don't have an account?
-      <a href="{% url 'user:signup' %}" class="text-primary ml-2">Create account</a>
-    </p>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <a class="underlineHover" href="#">Forgot Password?</a>
+    </div>
+
   </div>
 </div>
 {% endblock body %}

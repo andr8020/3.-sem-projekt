@@ -14,21 +14,20 @@
     <!-- Tabs Titles -->
 
     <!-- Icon -->
-    <div class="fadeIn first">
-      <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
-    </div>
+    <br>
+    </br>
 
     <!-- Login Form -->
     <form action="" method="post">
       {% csrf_token %}
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-      <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
+      {{ form|crispy }}
       <input type="submit" class="fadeIn fourth" value="Log In">
     </form>
 
     <!-- Remind Passowrd -->
     <div id="formFooter">
-      <a class="underlineHover" href="#">Forgot Password?</a>
+      Don't have an account?
+      <a href="{% url 'user:signup' %}" class="text-primary ml-2">Create account</a>
     </div>
 
   </div>

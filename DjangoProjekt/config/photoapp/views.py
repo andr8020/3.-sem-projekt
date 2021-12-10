@@ -1,6 +1,6 @@
-from django.shortcuts import render
 # photoapp/views.py
 from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import render
 
 from django.core.exceptions import PermissionDenied
 from django.urls.base import reverse
@@ -16,8 +16,9 @@ from .forms import CommentForm
 from .models import Photo, Comment
 
 from django.http import HttpResponseRedirect
-
-# photoapp/views.py
+from django.template import loader
+from django.http import HttpResponse
+from django.template import RequestContext
 
 
 def LikeView(request, pk):
@@ -90,6 +91,8 @@ class PhotoCreateView(LoginRequiredMixin, CreateView):
     template_name = 'photoapp/create.html'
 
     success_url = reverse_lazy('photo:list')
+
+    url = 'https://api.imgflip.com/get_memes'
 
     def form_valid(self, form):
 

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # 3rd party apps
     'taggit',
     'crispy_forms',
+    'django_fastdev',
 
     # Custom apps
     'photoapp',
@@ -158,3 +159,5 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+

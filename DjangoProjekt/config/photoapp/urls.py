@@ -32,7 +32,7 @@ urlpatterns = [
     path('photo/<int:pk>/add_comment/',
          PhotoCommentView.as_view(), name='add_comment'),
 
-    path('photo/<int:pk>/', LikeView, name='like_post'),
-    
-    
+    path('photo/<int:pk>/like', LikeView, name='like_post'),
+
+
 ]

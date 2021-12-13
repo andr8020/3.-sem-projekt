@@ -4,14 +4,6 @@
 {% block body %}
 
 
-<div style="background-color: whitesmoke; height: 400px; width: 300px; float: right" class="border">
-  <h2>Activity Feed</h2>
-  <ol class="activity-feed">
-    {{ photos.values }}
-  </ol>
-</div>
-
-
 <div class="row">
   {% for photo in photos %}
   <div class="row">
@@ -20,6 +12,24 @@
     </a>
   </div>
   {% endfor %}
+</div>
+
+<div style="background-color: whitesmoke; minheight: 400px; width: 300px; float: middle" class="border">
+
+  <h2 style="text-align: center;">Activity</h2>
+  <ol class="activity-feed">
+    {% for photo in photos %}
+    <strong>{{ photo }}</strong>
+    <ul>
+      <li>Dato: {{ photo.created }}</li>
+      <li>Bruger: {{ photo.submitter }}</li>
+      <li>Likes: {{ photo.total_likes }}</li>
+
+    </ul>
+
+
+    {% endfor %}
+  </ol>
 </div>
 
 {% endblock body %}

@@ -1,5 +1,6 @@
 <!-- photoapp/templates/photoapp/detail.html -->
 {% extends 'base.html' %}
+{% load static %}
 
 {% block body %}
 <div class="mx-auto">
@@ -29,8 +30,7 @@
 </div>
 
 
-<form action="{% url 'photo:like_post' photo.pk %}" method="POST">
-  {% csrf_token %}
+<form action="{% url 'photo:like_post' photo.pk %}" method="POST">{% csrf_token %}
 
   {% if user.is_authenticated %}
   {% if liked %}

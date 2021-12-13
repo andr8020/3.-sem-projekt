@@ -1,37 +1,16 @@
 # photoapp/views.py
-from django.shortcuts import get_object_or_404, redirect
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, redirect, render
 
 from django.core.exceptions import PermissionDenied
 from django.urls.base import reverse
 
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-
 from django.urls import reverse_lazy, reverse
-
 from .forms import CommentForm
-
 from .models import Photo, Comment
-
 from django.http import HttpResponseRedirect
-from django.template import loader
-from django.http import HttpResponse
-from django.template import RequestContext
-
-
-def LikeView(request, pk):
-    photo = get_object_or_404(Photo, id=request.POST.get('photo_id'))
-    liked = False
-    if photo.likes.filter(id=request.user.id).exists():
-        photo.likes.remove(request.user)
-        liked = False
-    else:
-        photo.likes.add(request.user)
-        liked = True
-
-    return HttpResponseRedirect(reverse('photo:detail', args=[str(pk)]))
+from django.template import RequestContext, loader
 
 
 class PhotoListView(ListView):
@@ -41,6 +20,10 @@ class PhotoListView(ListView):
     template_name = 'photoapp/list.html'
 
     context_object_name = 'photos'
+
+    def PhotoListView(request):
+        photos = Photo.objects.all().order_by('created')
+        return render(request, 'photoapp/list.html', {'photos': photos})
 
 
 class PhotoTagListView(PhotoListView):
@@ -65,6 +48,8 @@ class PhotoDetailView(DetailView):
     model = Photo
 
     template_name = 'photoapp/detail.html'
+
+    context_object_name = 'photo'
 
     def get_context_data(self, *args, **kwargs):
         context = super(PhotoDetailView, self).get_context_data(
@@ -146,3 +131,16 @@ class PhotoCommentView(CreateView):
         return super().form_valid(form)
 
     success_url = reverse_lazy('photo:list')
+
+
+def LikeView(request, pk):
+    photo = get_object_or_404(Photo, id=request.POST.get('photo_id'))
+    liked = False
+    if photo.likes.filter(id=request.user.id).exists():
+        photo.likes.remove(request.user)
+        liked = False
+    else:
+        photo.likes.add(request.user)
+        liked = True
+
+    return HttpResponseRedirect(reverse('photo:detail', args=[str(pk)]))

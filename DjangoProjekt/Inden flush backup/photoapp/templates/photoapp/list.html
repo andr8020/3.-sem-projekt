@@ -1,0 +1,36 @@
+<!-- photoapp/templates/photoapp/list.html -->
+{% extends 'base.html' %}
+
+{% block body %}
+
+
+<div style="background-color: whitesmoke; minheight: 400px; width: 300px; float: right" class="border">
+
+  <h2 style="text-align: center;">SQL</h2>
+  <ol class="activity-feed">
+    {% for photo in photos %}
+    <strong>{{ photo }}</strong>
+    <ul>
+      <li>Dato: {{ photo.created }}</li>
+      <li>Bruger: {{ photo.submitter }}</li>
+      <li>Likes: {{ photo.total_likes }}</li>
+
+    </ul>
+
+
+    {% endfor %}
+  </ol>
+</div>
+
+
+<div class="row">
+  {% for photo in photos %}
+  <div class="row">
+    <a href="{% url 'photo:detail' photo.id %}" class="d-block mb-4 h-100">
+      <img src="{{photo.image.url}}" class="rounded mx-auto d-block img-thumbnail img-fluid" alt="{{photo.title}}" />
+    </a>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock body %}

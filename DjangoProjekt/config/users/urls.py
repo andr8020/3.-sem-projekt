@@ -13,5 +13,5 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('<int:pk>/profile/', ShowProfilePageView.as_view(),
          name='show_profile_page'),
-    path('edit_user/', UserEditView.as_view(), name='edit_user'),
+    path('<int:pk>/edit_user/', UserEditView.as_view(), name='edit_user'),
 ]

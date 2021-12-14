@@ -22,7 +22,7 @@ class PhotoListView(ListView):
     context_object_name = 'photos'
 
     def PhotoListView(request):
-        photos = Photo.objects.all().order_by('created')
+        photos = Photo.objects.order_by('-created').all()
         return render(request, 'photoapp/list.html', {'photos': photos})
 
 

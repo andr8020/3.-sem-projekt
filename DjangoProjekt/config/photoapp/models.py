@@ -12,6 +12,7 @@ import random
 import time
 import textwrap
 from string import ascii_letters
+from django.utils import timezone
 
 
 class Photo(models.Model):
@@ -20,7 +21,7 @@ class Photo(models.Model):
 
     description = models.CharField(max_length=250)
 
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(default=timezone.now)
 
     image = models.ImageField(upload_to='photos/')
 
@@ -62,6 +63,8 @@ class Photo(models.Model):
 
         I2 = ImageDraw.Draw(im)
 
+        stroke_color = (0, 0, 0)
+
         avg_char_width = sum(myFont.getsize(
             char)[0] for char in ascii_letters) / len(ascii_letters)
 
@@ -70,7 +73,7 @@ class Photo(models.Model):
         Tekst = textwrap.fill(text=Tekst, width=max_char_count)
 
         I2.text((im.size[0]/2, im.size[1] / 2), Tekst, font=myFont,
-                fill="#ffffff", anchor='rs')
+                fill="#ffffff", stroke_width=1, stroke_fill=stroke_color, anchor='rs')
 
         im.save(output, format='JPEG', quality=90)
         output.seek(0)

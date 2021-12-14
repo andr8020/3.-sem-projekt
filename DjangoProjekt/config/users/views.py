@@ -1,6 +1,7 @@
 # users/views.py
 
 from django.views.generic import CreateView, DetailView
+from django.views import generic
 
 from django.contrib.auth import authenticate, login, logout
 
@@ -60,8 +61,8 @@ def logout_user(request):
     return redirect('list')
 
 
-class UserEditView(CreateView):
-    form_class = UserChangeForm
+class UserEditView(generic.UpdateView):
+    form_class = EditProfileForm
     template_name = 'users/edit_user.html'
     success_url = reverse_lazy('list')
 

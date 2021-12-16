@@ -50,12 +50,26 @@ class Photo(models.Model):
 
         Ærstatning = file2.readlines()
         ÆrstatningVal = random.choice(Ærstatning)
+        ÆrstatningVal2 = random.choice(Ærstatning)
 
-        Tekst = SætningVal.replace("blank", ÆrstatningVal)
+        words = SætningVal.split()
+        counts = {}
+        word = "blank"
+        for word in words:
+            if word in counts:
+                counts[word] += 1
+            else:
+                counts[word] = 1
+
+        if counts == 1:
+            Tekst = SætningVal.replace("blank", ÆrstatningVal)
+        else:
+            Tekst = SætningVal.replace("blank", ÆrstatningVal, 1).replace(
+                "blank", ÆrstatningVal2, 2)
 
         # Billedegenering:
 
-        myFont = ImageFont.truetype('C:\Windows\Fonts\Tahoma.ttf', 50)
+        myFont = ImageFont.truetype('C:\Windows\Fonts\Tahoma.ttf', 100)
 
         im = Image.open(self.image)
 
@@ -68,12 +82,12 @@ class Photo(models.Model):
         avg_char_width = sum(myFont.getsize(
             char)[0] for char in ascii_letters) / len(ascii_letters)
 
-        max_char_count = int(im.size[0] * .618 / avg_char_width)
+        max_char_count = int(im.size[0] * .518 / avg_char_width)
 
         Tekst = textwrap.fill(text=Tekst, width=max_char_count)
 
         I2.text((im.size[0]/2, im.size[1] / 2), Tekst, font=myFont,
-                fill="#ffffff", stroke_width=1, stroke_fill=stroke_color, anchor='rs')
+                fill="#ffffff", stroke_width=4, stroke_fill=stroke_color, anchor='rs')
 
         im.save(output, format='JPEG', quality=90)
         output.seek(0)

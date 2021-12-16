@@ -1,24 +1,26 @@
 <!-- photoapp/templates/photoapp/list.html -->
 {% extends 'base.html' %}
+{% load crispy_forms_filters %}
 
 {% block body %}
 
 
 <div class="row">
-  {% for photo in photos %}
-  <div class="row">
+  {% for photo in photos|dictsortreversed:"created" %}
+  <div style="margin:0 auto" class="row">
     <a href="{% url 'photo:detail' photo.id %}" class="d-block mb-4 h-100">
-      <img src="{{photo.image.url}}" class="rounded mx-auto d-block img-thumbnail img-fluid" alt="{{photo.title}}" />
+      <img src="{{photo.image.url}}" class="rounded mx-auto d-block img-thumbnail img-fluid" alt="{{photo.title}}"
+        style="max-width:600px;width:100%" />
     </a>
   </div>
   {% endfor %}
 </div>
 
-<div style="background-color: whitesmoke; minheight: 400px; width: 300px; float: middle" class="border">
+<div style="background-color: whitesmoke; minheight: 400px; width: 600px; float: none; margin:0 auto;" class="border">
 
   <h2 style="text-align: center;">Activity</h2>
   <ol class="activity-feed">
-    {% for photo in photos %}
+    {% for photo in photos|dictsortreversed:"created"|slice:":5" %}
     <strong>{{ photo }}</strong>
     <ul>
       <li>Dato: {{ photo.created }}</li>

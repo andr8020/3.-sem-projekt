@@ -146,10 +146,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'templates/static'),
-    os.path.join(BASE_DIR, 'users/static'),
-    os.path.join(BASE_DIR, 'users/templates/users/static'),
-    os.path.join(BASE_DIR, 'photoapp/templates/static')
+    os.path.join(BASE_DIR, 'templates/templatesstatic'),
+    os.path.join(BASE_DIR, 'users/usersstatic'),
 ]
 
 # Default primary key field type

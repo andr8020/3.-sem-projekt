@@ -41,12 +41,12 @@ SESSION_COOKIE_SECURE = False
 # Application definition
 
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.staticfiles',
     'django_extensions',
 
     # 3rd party apps
@@ -146,7 +146,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'templates/static'),
+    os.path.join(BASE_DIR, 'users/static'),
+    os.path.join(BASE_DIR, 'users/templates/users/static'),
+    os.path.join(BASE_DIR, 'photoapp/templates/static')
 ]
 
 # Default primary key field type

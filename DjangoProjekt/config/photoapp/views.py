@@ -77,8 +77,6 @@ class PhotoCreateView(LoginRequiredMixin, CreateView):
 
     success_url = reverse_lazy('photo:list')
 
-    url = 'https://api.imgflip.com/get_memes'
-
     def form_valid(self, form):
 
         form.instance.submitter = self.request.user

@@ -21,12 +21,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-xc$ynlax6k&y*d@-w78p_%v1u_@h_889mg_qm!0wra=i4mms0='
+SECRET_KEY = '!efq5h!j^$e%8r4&^xnvxl!b&ry-u8s+2^qn!(-=vck&g3t0g8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'memegram.dk',
+    '127.0.0.1'
+
+]
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 
 # Application definition
@@ -39,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
+    'django_extensions',
 
     # 3rd party apps
     'taggit',
@@ -167,3 +175,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+GRAPH_MODELS = {
+    'all_applications': True,
+    'group_models': True,
+}

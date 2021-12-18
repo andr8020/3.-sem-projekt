@@ -20,7 +20,7 @@ from django.urls import path, include  # Import this function
 # New imports
 from django.conf import settings
 from django.conf.urls.static import static
-import debug_toolbar
+#import debug_toolbar
 
 # config/urls.py
 
@@ -30,5 +30,5 @@ urlpatterns = [
     path('', include('photoapp.urls')),
     # Auth app
     path('users/', include('users.urls')),
-    path('__debug__/', include(debug_toolbar.urls)),
+    #path('__debug__/', include(debug_toolbar.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

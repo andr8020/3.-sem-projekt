@@ -69,7 +69,7 @@ class Photo(models.Model):
 
         # Billedegenering:
 
-        myFont = ImageFont.truetype('C:\Windows\Fonts\Tahoma.ttf', 100)
+        myFont = ImageFont.truetype('C:\Windows\Fonts\Tahoma.ttf', 70)
 
         im = Image.open(self.image)
 

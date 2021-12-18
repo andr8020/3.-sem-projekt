@@ -29,12 +29,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'memegram.dk',
-    '127.0.0.1'
+    '127.0.0.1',
+    '192.168.1.64'
 
 ]
 
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = False
 
 
 # Application definition

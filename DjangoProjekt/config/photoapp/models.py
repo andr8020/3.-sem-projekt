@@ -87,7 +87,7 @@ class Photo(models.Model):
         Tekst = textwrap.fill(text=Tekst, width=max_char_count)
 
         I2.text((im.size[0]/2, im.size[1] / 2), Tekst, font=myFont,
-                fill="#ffffff", stroke_width=4, stroke_fill=stroke_color)
+                fill="#ffffff", stroke_width=4, stroke_fill=stroke_color, anchor='rs')
 
         im.save(output, format='JPEG', quality=90)
         output.seek(0)
